@@ -25,7 +25,7 @@ Deve ser criado um aplicativo em Flutter com as seguintes especificações:
 ## 🕵 Itens a serem avaliados
 Pense no desafio como uma oportunidade de mostrar todo o seu conhecimento. Independente de onde conseguiu chegar no teste, é importante disponibilizar sua implementação para analisarmos.
 
-* Tratamento de casos alternativos, *edge cases* e erros 
+* Tratamento de validações, *edge cases* e erros 
 * Estrutura e organização do projeto
 * Integração com as APIs
 * Manutebilidade e testabilidade do seu código
