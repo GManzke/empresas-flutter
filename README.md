@@ -20,10 +20,12 @@ Deve ser criado um aplicativo em Flutter com as seguintes especificações:
 * Escolher a arquitetura e padrões utilizados
 * Usar ou não usar bibliotecas
 * Escolher a ferramenta/padrão para gerenciamento de estado (Bloc, Mobx, Redux etc.)
+* Complementar ou alterar layout e/ou funcionalidades para **INCREMENTAR** o projeto, não negligenciando os requisitos citados no escopo.
 
 ## 🕵 Itens a serem avaliados
 Pense no desafio como uma oportunidade de mostrar todo o seu conhecimento. Independente de onde conseguiu chegar no teste, é importante disponibilizar sua implementação para analisarmos.
 
+* Tratamento de casos alternativos, *edge cases* e erros 
 * Estrutura e organização do projeto
 * Integração com as APIs
 * Manutebilidade e testabilidade do seu código
