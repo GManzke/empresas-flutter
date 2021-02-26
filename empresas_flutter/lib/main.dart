@@ -1,4 +1,9 @@
+import 'package:empresas_flutter/models/app_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/redux.dart';
+
+import 'redux/reducers/app_reducers.dart';
 
 void main() {
   runApp(IoasysApp());
@@ -7,11 +12,15 @@ void main() {
 class IoasysApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Ioasys',
-      theme: ThemeData(
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        primarySwatch: Colors.blue,
+    return StoreProvider(
+      store: Store<AppState>(appReducers,
+          initialState: AppState(), middleware: []),
+      child: MaterialApp(
+        title: 'Ioasys',
+        theme: ThemeData(
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          primarySwatch: Colors.blue,
+        ),
       ),
     );
   }
