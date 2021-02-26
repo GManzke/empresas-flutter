@@ -15,11 +15,7 @@ class _$AppState extends AppState {
   factory _$AppState([void Function(AppStateBuilder) updates]) =>
       (new AppStateBuilder()..update(updates)).build();
 
-  _$AppState._({this.operationState, this.user}) : super._() {
-    if (operationState == null) {
-      throw new BuiltValueNullFieldError('AppState', 'operationState');
-    }
-  }
+  _$AppState._({this.operationState, this.user}) : super._();
 
   @override
   AppState rebuild(void Function(AppStateBuilder) updates) =>

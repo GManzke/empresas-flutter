@@ -1,9 +1,10 @@
-import 'package:empresas_flutter/models/user.dart';
+import 'package:empresas_flutter/models/app_state.dart';
 import 'package:redux/redux.dart';
 
 import '../actions/actions.dart';
 
-final userReducer =
-    combineReducers<User>([TypedReducer<User, UpdateUserAction>(_userReducer)]);
+final userReducer = combineReducers<AppState>(
+    [TypedReducer<AppState, UpdateUserAction>(_userReducer)]);
 
-User _userReducer(_, action) => action.user.toBuilder();
+AppState _userReducer(AppState oldState, action) =>
+    oldState.rebuild((b) => b.user.replace(action.user));
