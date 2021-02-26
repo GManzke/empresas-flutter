@@ -21,6 +21,7 @@ class IoasysApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
           primarySwatch: Colors.blue,
         ),
+        home: Scaffold(),
       ),
     );
   }
