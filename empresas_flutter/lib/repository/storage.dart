@@ -15,33 +15,45 @@ class StorageManager<T> {
   StorageManager(this.serializer, this.tag);
 
   Future _open() async {
-    if (!_isOpen) {
-      final dir = await getApplicationDocumentsDirectory();
-      final storage = File('${dir.path}/$tag.json');
+    try {
+      if (!_isOpen) {
+        final dir = await getApplicationDocumentsDirectory();
+        final storage = File('${dir.path}/$tag.json');
 
-      _file = await storage.exists() ? storage : await storage.create();
+        _file = await storage.exists() ? storage : await storage.create();
 
-      _isOpen = true;
+        _isOpen = true;
+      }
+    } catch (e) {
+      print(e);
     }
   }
 
   Future<T> load() async {
-    if (!_isOpen) await _open();
+    try {
+      if (!_isOpen) await _open();
 
-    final content = await _file.readAsString();
+      final content = await _file.readAsString();
 
-    return content.isEmpty
-        ? null
-        : serializers.deserializeWith(serializer, jsonDecode(content));
+      return content.isEmpty
+          ? null
+          : serializers.deserializeWith(serializer, jsonDecode(content));
+    } catch (e) {
+      print(e);
+      return null;
+    }
   }
 
   Future save(T data) async {
-    if (!_isOpen) await _open();
+    try {
+      if (!_isOpen) await _open();
 
-    final content = serializers.serializeWith(serializer, data);
+      final content = serializers.serializeWith(serializer, data);
 
-    await _file.writeAsString(jsonEncode(content));
-    return;
+      await _file.writeAsString(jsonEncode(content));
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future delete() async {
@@ -51,7 +63,7 @@ class StorageManager<T> {
       _isOpen = false;
       await file.delete();
     } catch (e) {
-      return;
+      print(e);
     }
   }
 }

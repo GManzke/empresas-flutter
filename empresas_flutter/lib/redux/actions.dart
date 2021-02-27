@@ -14,8 +14,4 @@ class UpdateErrorAction {
 
   UpdateErrorAction(this.errorState);
 }
-class UpdateUserAction {
-  final UserState userState;
 
-  UpdateUserAction(this.userState);
-}

@@ -7,6 +7,8 @@ import 'auth_credentials_actions.dart';
 List<Middleware<AppState>> createAuthCredentialsMiddleware() => [
       TypedMiddleware<AppState, PersistAuthCredentials>(
           _persistAuthCredentialsMiddleware()),
+      TypedMiddleware<AppState, ClearAuthCredentials>(
+          _clearAuthCredentialsMiddleware()),
     ];
 
 //TODO: Verificar se é necessário o await
@@ -14,4 +16,9 @@ List<Middleware<AppState>> createAuthCredentialsMiddleware() => [
 Middleware<AppState> _persistAuthCredentialsMiddleware() {
   return (Store<AppState> store, action, NextDispatcher next) async =>
       await authCredentialsStorage.save(action.authCredentials);
+}
+
+Middleware<AppState> _clearAuthCredentialsMiddleware() {
+  return (Store<AppState> store, action, NextDispatcher next) async =>
+      await authCredentialsStorage.delete();
 }

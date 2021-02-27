@@ -1,5 +1,5 @@
-import 'package:empresas_flutter/features/login/redux/actions.dart';
-import 'package:empresas_flutter/features/login/redux/middleware.dart';
+import 'package:empresas_flutter/features/login/redux/login_actions.dart';
+import 'package:empresas_flutter/features/login/redux/login_middlewares.dart';
 import 'package:empresas_flutter/models/app_state.dart';
 import 'package:empresas_flutter/redux/reducers.dart';
 import 'package:empresas_flutter/repository/repository.dart';

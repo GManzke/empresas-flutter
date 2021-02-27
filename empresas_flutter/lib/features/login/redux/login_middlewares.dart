@@ -1,10 +1,9 @@
 import 'dart:convert';
 
 import 'package:empresas_flutter/extensions/store_extension.dart';
-import 'package:empresas_flutter/features/login/redux/actions.dart';
+import 'package:empresas_flutter/features/login/redux/login_actions.dart';
 import 'package:empresas_flutter/models/app_state.dart';
 import 'package:empresas_flutter/models/user_state.dart';
-import 'package:empresas_flutter/redux/actions.dart';
 import 'package:empresas_flutter/repository/repository.dart';
 import 'package:redux/redux.dart';
 
@@ -23,9 +22,9 @@ Middleware<AppState> _authenticateUserMiddleware(Repository repository) {
       final bodyData = json.decode(response.body);
 
       if (bodyData['success'] == 200) {
-        UpdateUserAction(UserState((b) => b
+        store.dispatch(UpdateUserAction(UserState((b) => b
           ..investorName = bodyData['investor']['investor_name']
-          ..email = 'email'));
+          ..email = 'email')));
       } else {
         store.operationFail(
             major: 'Credenciais inválidas, verifique e tente novamente');

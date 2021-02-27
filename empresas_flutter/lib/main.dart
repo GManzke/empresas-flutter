@@ -1,4 +1,5 @@
 import 'package:empresas_flutter/models/app_state.dart';
+import 'package:empresas_flutter/navigation/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
@@ -21,7 +22,8 @@ class IoasysApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
           primarySwatch: Colors.blue,
         ),
-        home: Scaffold(),
+        initialRoute: '/loader',
+        onGenerateRoute: AppRoutes.generateRoute,
       ),
     );
   }

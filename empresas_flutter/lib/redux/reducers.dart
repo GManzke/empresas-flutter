@@ -1,3 +1,4 @@
+import 'package:empresas_flutter/features/login/redux/login_reducers.dart';
 import 'package:empresas_flutter/models/app_state.dart';
 import 'package:redux/redux.dart';
 
@@ -6,7 +7,7 @@ import 'actions.dart';
 final appReducers = combineReducers<AppState>([
   TypedReducer<AppState, UpdateOperationStateAction>(_operationStateReducer),
   TypedReducer<AppState, UpdateErrorAction>(_errorReducer),
-  TypedReducer<AppState, UpdateUserAction>(_userReducer),
+  loginReducers,
 ]);
 
 AppState _operationStateReducer(AppState oldState, action) =>
@@ -14,6 +15,3 @@ AppState _operationStateReducer(AppState oldState, action) =>
 
 AppState _errorReducer(AppState oldState, action) =>
     oldState.rebuild((b) => b.errorState.replace(action.errorState));
-
-AppState _userReducer(AppState oldState, action) =>
-    oldState.rebuild((b) => b.userState.replace(action.userState));

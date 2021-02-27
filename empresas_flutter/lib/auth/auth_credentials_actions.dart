@@ -5,3 +5,5 @@ class PersistAuthCredentials {
 
   PersistAuthCredentials(this.authCredentials);
 }
+
+class ClearAuthCredentials {}
