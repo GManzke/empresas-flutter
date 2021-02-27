@@ -1,8 +1,8 @@
 import 'package:empresas_flutter/models/app_state.dart';
 import 'package:empresas_flutter/models/operation_state.dart';
-import 'package:empresas_flutter/models/user.dart';
-import 'package:empresas_flutter/redux/actions/actions.dart';
-import 'package:empresas_flutter/redux/reducers/app_reducers.dart';
+import 'package:empresas_flutter/models/user_state.dart';
+import 'package:empresas_flutter/redux/actions.dart';
+import 'package:empresas_flutter/redux/reducers.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:redux/redux.dart';
 
@@ -33,12 +33,12 @@ main() {
       final investorName = 'Usuário de teste';
       final email = 'teste@gmail.com';
 
-      store.dispatch(UpdateUserAction(User((b) => b
+      store.dispatch(UpdateUserAction(UserState((b) => b
         ..investorName = investorName
         ..email = email)));
 
-      expect(store.state.user?.investorName, investorName);
-      expect(store.state.user?.email, email);
+      expect(store.state.userState?.investorName, investorName);
+      expect(store.state.userState?.email, email);
     });
   });
 }

@@ -13,7 +13,10 @@ dependencies:
 
   cupertino_icons: ^1.0.0
   flutter_redux: ^0.7.0
+  path_provider: ^1.2.0
   built_value: ^7.1.0
+  mockito: ^4.1.4
+  http: ^0.12.2
 
 dev_dependencies:
   flutter_test:

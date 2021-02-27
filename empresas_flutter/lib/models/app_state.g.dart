@@ -10,12 +10,15 @@ class _$AppState extends AppState {
   @override
   final OperationState operationState;
   @override
-  final User user;
+  final ErrorState errorState;
+  @override
+  final UserState userState;
 
   factory _$AppState([void Function(AppStateBuilder) updates]) =>
       (new AppStateBuilder()..update(updates)).build();
 
-  _$AppState._({this.operationState, this.user}) : super._();
+  _$AppState._({this.operationState, this.errorState, this.userState})
+      : super._();
 
   @override
   AppState rebuild(void Function(AppStateBuilder) updates) =>
@@ -29,19 +32,22 @@ class _$AppState extends AppState {
     if (identical(other, this)) return true;
     return other is AppState &&
         operationState == other.operationState &&
-        user == other.user;
+        errorState == other.errorState &&
+        userState == other.userState;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, operationState.hashCode), user.hashCode));
+    return $jf($jc($jc($jc(0, operationState.hashCode), errorState.hashCode),
+        userState.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('AppState')
           ..add('operationState', operationState)
-          ..add('user', user))
+          ..add('errorState', errorState)
+          ..add('userState', userState))
         .toString();
   }
 }
@@ -54,9 +60,16 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   set operationState(OperationState operationState) =>
       _$this._operationState = operationState;
 
-  UserBuilder _user;
-  UserBuilder get user => _$this._user ??= new UserBuilder();
-  set user(UserBuilder user) => _$this._user = user;
+  ErrorStateBuilder _errorState;
+  ErrorStateBuilder get errorState =>
+      _$this._errorState ??= new ErrorStateBuilder();
+  set errorState(ErrorStateBuilder errorState) =>
+      _$this._errorState = errorState;
+
+  UserStateBuilder _userState;
+  UserStateBuilder get userState =>
+      _$this._userState ??= new UserStateBuilder();
+  set userState(UserStateBuilder userState) => _$this._userState = userState;
 
   AppStateBuilder() {
     AppState._initializeBuilder(this);
@@ -65,7 +78,8 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   AppStateBuilder get _$this {
     if (_$v != null) {
       _operationState = _$v.operationState;
-      _user = _$v.user?.toBuilder();
+      _errorState = _$v.errorState?.toBuilder();
+      _userState = _$v.userState?.toBuilder();
       _$v = null;
     }
     return this;
@@ -90,12 +104,16 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
     try {
       _$result = _$v ??
           new _$AppState._(
-              operationState: operationState, user: _user?.build());
+              operationState: operationState,
+              errorState: _errorState?.build(),
+              userState: _userState?.build());
     } catch (_) {
       String _$failedField;
       try {
-        _$failedField = 'user';
-        _user?.build();
+        _$failedField = 'errorState';
+        _errorState?.build();
+        _$failedField = 'userState';
+        _userState?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'AppState', _$failedField, e.toString());

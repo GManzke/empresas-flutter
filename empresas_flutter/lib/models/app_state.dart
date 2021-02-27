@@ -1,6 +1,8 @@
 import 'package:built_value/built_value.dart';
 import 'package:empresas_flutter/models/operation_state.dart';
-import 'package:empresas_flutter/models/user.dart';
+import 'package:empresas_flutter/models/user_state.dart';
+
+import 'error_state.dart';
 
 part 'app_state.g.dart';
 
@@ -16,5 +18,8 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
   OperationState get operationState;
 
   @nullable
-  User get user;
+  ErrorState get errorState;
+
+  @nullable
+  UserState get userState;
 }

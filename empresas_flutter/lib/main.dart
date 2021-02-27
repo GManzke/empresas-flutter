@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
-import 'redux/reducers/app_reducers.dart';
+import 'redux/reducers.dart';
 
 void main() {
   runApp(IoasysApp());
