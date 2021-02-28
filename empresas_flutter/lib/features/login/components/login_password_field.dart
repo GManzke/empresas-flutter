@@ -16,6 +16,20 @@ class LoginPasswordField extends StatefulWidget {
 class _LoginPasswordFieldState extends State<LoginPasswordField> {
   bool _isVisible = false;
 
+  final defaultOutlineBorder = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10),
+    borderSide: BorderSide(
+      color: Colors.transparent,
+    ),
+  );
+
+  final errorOutlineBorder = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10),
+    borderSide: BorderSide(
+      color: Colors.red,
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -35,31 +49,11 @@ class _LoginPasswordFieldState extends State<LoginPasswordField> {
           textInputAction: TextInputAction.done,
           obscureText: !_isVisible,
           decoration: InputDecoration(
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(
-                color: Colors.transparent,
-              ),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(
-                color: Colors.transparent,
-              ),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(
-                color: Colors.red,
-              ),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(
-                color: Colors.red,
-              ),
-            ),
-            fillColor: AppColors.secondary,
+            focusedBorder: defaultOutlineBorder,
+            enabledBorder: defaultOutlineBorder,
+            focusedErrorBorder: errorOutlineBorder,
+            errorBorder: errorOutlineBorder,
+            fillColor: AppColors.background,
             suffixIcon: GestureDetector(
                 onTap: changeVisibility,
                 child: Icon(

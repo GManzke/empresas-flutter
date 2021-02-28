@@ -40,12 +40,12 @@ class EnterpriseDetailView
                   aspectRatio: 1.0,
                   child: Container(
                     decoration: BoxDecoration(
-                        color: AppColors.secondary,
+                        color: AppColors.background,
                         borderRadius: BorderRadius.circular(10)),
                     child: Icon(
                       Icons.arrow_back_rounded,
                       color: AppColors.primary,
-                      size: 24,
+                      size: 28,
                     ),
                   ),
                 ),
@@ -54,7 +54,8 @@ class EnterpriseDetailView
                 child: AutoSizeText(
                   info.enterpriseName,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.bold),
                 ),
               ),
               AspectRatio(
@@ -78,9 +79,9 @@ class EnterpriseDetailView
               children: [
                 Expanded(
                   child: SingleChildScrollView(
-                    child: Text(
+                    child: AutoSizeText(
                       info.description,
-                      style: TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16),
                     ),
                   ),
                 )

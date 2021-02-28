@@ -17,21 +17,26 @@ class ListSearchField extends StatelessWidget {
       textInputAction: TextInputAction.search,
       onFieldSubmitted: onSubmit,
       decoration: InputDecoration(
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-              color: Colors.transparent,
-            ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(
+            color: Colors.transparent,
           ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-              color: Colors.transparent,
-            ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(
+            color: Colors.transparent,
           ),
-          prefixIcon: Icon(Icons.search_rounded),
-          filled: true,
-          fillColor: AppColors.secondary),
+        ),
+        prefixIcon: Icon(
+          Icons.search_rounded,
+          size: 28,
+        ),
+        hintText: 'Pesquise por empresa',
+        fillColor: AppColors.background,
+        filled: true,
+      ),
     );
   }
 }

@@ -7,7 +7,7 @@ class ListTopBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        height: cts.maxHeight * 0.22,
+        height: cts.maxHeight * 0.12,
         decoration: BoxDecoration(
           image: DecorationImage(
               image: AssetImage('assets/background.png'), fit: BoxFit.cover),

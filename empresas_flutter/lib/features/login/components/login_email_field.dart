@@ -4,10 +4,24 @@ import 'package:flutter/material.dart';
 class LoginEmailField extends StatelessWidget {
   final Function(String, String) onSaved;
 
-  const LoginEmailField({
+  LoginEmailField({
     Key key,
     this.onSaved,
   }) : super(key: key);
+
+  final defaultOutlineBorder = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10),
+    borderSide: BorderSide(
+      color: Colors.transparent,
+    ),
+  );
+
+  final errorOutlineBorder = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10),
+    borderSide: BorderSide(
+      color: Colors.red,
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -27,32 +41,12 @@ class LoginEmailField extends StatelessWidget {
           keyboardType: TextInputType.emailAddress,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                ),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
-                  color: Colors.red,
-                ),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
-                  color: Colors.red,
-                ),
-              ),
+              focusedBorder: defaultOutlineBorder,
+              enabledBorder: defaultOutlineBorder,
+              focusedErrorBorder: errorOutlineBorder,
+              errorBorder: errorOutlineBorder,
               filled: true,
-              fillColor: AppColors.secondary),
+              fillColor: AppColors.background),
         ),
       ],
     );

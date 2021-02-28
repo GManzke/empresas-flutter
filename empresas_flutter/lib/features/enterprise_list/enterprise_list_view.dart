@@ -1,3 +1,4 @@
+import 'package:empresas_flutter/configuration/app_colors.dart';
 import 'package:empresas_flutter/extensions/constraints_extension.dart';
 import 'package:empresas_flutter/features/enterprise_list/redux/enterprise_list_actions.dart';
 import 'package:empresas_flutter/models/app_state.dart';
@@ -21,10 +22,13 @@ class EnterpriseListView extends BaseLayout<EnterpriseListViewModel, AppState> {
     super.onInit(store);
   }
 
+  final _textStyle = TextStyle(fontSize: 16, color: AppColors.textColor);
+
   @override
   Widget layout(
       BuildContext ctx, EnterpriseListViewModel vm, BoxConstraints cts) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Stack(
           alignment: Alignment.bottomCenter,
@@ -59,20 +63,31 @@ class EnterpriseListView extends BaseLayout<EnterpriseListViewModel, AppState> {
     }
     if (vm.enterpriseList.isNotEmpty) {
       return Padding(
-        padding: EdgeInsets.all(cts.padding(0.06)),
+        padding: EdgeInsets.symmetric(horizontal: cts.padding(0.06)),
         child: ListView.builder(
             itemCount: vm.enterpriseList.length,
-            itemBuilder: (ctx, i) => EnterpriseItemLayout(
-                  cts: cts,
-                  goToDetails: vm.goToDetails,
-                  info: vm.enterpriseList[i],
-                )),
+            itemBuilder: (ctx, i) {
+              if (i == 0) {
+                return Padding(
+                  padding: EdgeInsets.only(bottom: cts.padding(0.06)),
+                  child: Text(
+                    '${vm.enterpriseList.length} resultado(s) encontrado(s)',
+                    style: _textStyle,
+                  ),
+                );
+              }
+              return EnterpriseItemLayout(
+                cts: cts,
+                goToDetails: vm.goToDetails,
+                info: vm.enterpriseList[i],
+              );
+            }),
       );
     } else {
       return Center(
         child: Text(
           'Nenhum resultado encontrado',
-          style: TextStyle(fontSize: 16),
+          style: _textStyle,
         ),
       );
     }
