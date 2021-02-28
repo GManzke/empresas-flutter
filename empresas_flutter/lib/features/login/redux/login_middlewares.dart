@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:empresas_flutter/auth/auth_credentials.dart';
+import 'package:empresas_flutter/auth/auth_credentials_actions.dart';
 import 'package:empresas_flutter/extensions/store_extension.dart';
 import 'package:empresas_flutter/features/login/redux/login_actions.dart';
 import 'package:empresas_flutter/models/app_state.dart';
@@ -28,6 +30,12 @@ Middleware<AppState> _authenticateUserMiddleware(Repository repository) {
         store.dispatch(UpdateUserAction(UserState((b) => b
           ..investorName = bodyData['investor']['investor_name']
           ..email = 'email')));
+
+        store.dispatch(PersistAuthCredentialsAction(AuthCredentials((b) => b
+          ..accessToken = response.headers['access-token']
+          ..client = response.headers['client']
+          ..uid = response.headers['uid'])));
+
         store.dispatch(NavigateReplaceAction(AppRoutes.enterprise_list));
       } else {
         store.operationFail(

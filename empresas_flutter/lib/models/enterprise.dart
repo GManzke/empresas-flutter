@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:empresas_flutter/serializer/serializers.dart';
@@ -11,15 +12,18 @@ abstract class Enterprise implements Built<Enterprise, EnterpriseBuilder> {
 
   factory Enterprise([updates(EnterpriseBuilder b)]) = _$Enterprise;
 
+  @nullable
   int get id;
 
+  @nullable
   @BuiltValueField(wireName: 'enterprise_name')
   String get enterpriseName;
 
+  @nullable
   String get description;
 
+  @nullable
   String get photo;
-
 
   String toJson() {
     return json.encode(serializers.serializeWith(Enterprise.serializer, this));

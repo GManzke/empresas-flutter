@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  built_collection: ^4.3.2
   cupertino_icons: ^1.0.0
   flutter_redux: ^0.7.0
   path_provider: ^1.2.0

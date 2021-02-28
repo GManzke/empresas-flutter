@@ -17,15 +17,19 @@ class _$UserStateSerializer implements StructuredSerializer<UserState> {
   @override
   Iterable<Object> serialize(Serializers serializers, UserState object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'investor_name',
-      serializers.serialize(object.investorName,
-          specifiedType: const FullType(String)),
-      'email',
-      serializers.serialize(object.email,
-          specifiedType: const FullType(String)),
-    ];
-
+    final result = <Object>[];
+    if (object.investorName != null) {
+      result
+        ..add('investor_name')
+        ..add(serializers.serialize(object.investorName,
+            specifiedType: const FullType(String)));
+    }
+    if (object.email != null) {
+      result
+        ..add('email')
+        ..add(serializers.serialize(object.email,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -64,14 +68,7 @@ class _$UserState extends UserState {
   factory _$UserState([void Function(UserStateBuilder) updates]) =>
       (new UserStateBuilder()..update(updates)).build();
 
-  _$UserState._({this.investorName, this.email}) : super._() {
-    if (investorName == null) {
-      throw new BuiltValueNullFieldError('UserState', 'investorName');
-    }
-    if (email == null) {
-      throw new BuiltValueNullFieldError('UserState', 'email');
-    }
-  }
+  _$UserState._({this.investorName, this.email}) : super._();
 
   @override
   UserState rebuild(void Function(UserStateBuilder) updates) =>

@@ -9,9 +9,11 @@ part 'user_state.g.dart';
 abstract class UserState implements Built<UserState, UserStateBuilder> {
   UserState._();
 
+  @nullable
   @BuiltValueField(wireName: 'investor_name')
   String get investorName;
 
+  @nullable
   String get email;
 
   factory UserState([void Function(UserStateBuilder) updates]) = _$UserState;

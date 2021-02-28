@@ -1,3 +1,4 @@
+import 'package:empresas_flutter/features/enterprise_list/redux/enterprise_list_reducers.dart';
 import 'package:empresas_flutter/features/login/redux/login_reducers.dart';
 import 'package:empresas_flutter/models/app_state.dart';
 import 'package:redux/redux.dart';
@@ -8,6 +9,7 @@ final appReducers = combineReducers<AppState>([
   TypedReducer<AppState, StartLoadingAction>(_startLoadingReducer),
   TypedReducer<AppState, StopLoadingAction>(_stopLoadingReducer),
   TypedReducer<AppState, UpdateErrorAction>(_errorReducer),
+  enterpriseListReducers,
   loginReducers,
 ]);
 

@@ -17,20 +17,31 @@ class _$EnterpriseSerializer implements StructuredSerializer<Enterprise> {
   @override
   Iterable<Object> serialize(Serializers serializers, Enterprise object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'id',
-      serializers.serialize(object.id, specifiedType: const FullType(int)),
-      'enterprise_name',
-      serializers.serialize(object.enterpriseName,
-          specifiedType: const FullType(String)),
-      'description',
-      serializers.serialize(object.description,
-          specifiedType: const FullType(String)),
-      'photo',
-      serializers.serialize(object.photo,
-          specifiedType: const FullType(String)),
-    ];
-
+    final result = <Object>[];
+    if (object.id != null) {
+      result
+        ..add('id')
+        ..add(serializers.serialize(object.id,
+            specifiedType: const FullType(int)));
+    }
+    if (object.enterpriseName != null) {
+      result
+        ..add('enterprise_name')
+        ..add(serializers.serialize(object.enterpriseName,
+            specifiedType: const FullType(String)));
+    }
+    if (object.description != null) {
+      result
+        ..add('description')
+        ..add(serializers.serialize(object.description,
+            specifiedType: const FullType(String)));
+    }
+    if (object.photo != null) {
+      result
+        ..add('photo')
+        ..add(serializers.serialize(object.photo,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -82,20 +93,7 @@ class _$Enterprise extends Enterprise {
       (new EnterpriseBuilder()..update(updates)).build();
 
   _$Enterprise._({this.id, this.enterpriseName, this.description, this.photo})
-      : super._() {
-    if (id == null) {
-      throw new BuiltValueNullFieldError('Enterprise', 'id');
-    }
-    if (enterpriseName == null) {
-      throw new BuiltValueNullFieldError('Enterprise', 'enterpriseName');
-    }
-    if (description == null) {
-      throw new BuiltValueNullFieldError('Enterprise', 'description');
-    }
-    if (photo == null) {
-      throw new BuiltValueNullFieldError('Enterprise', 'photo');
-    }
-  }
+      : super._();
 
   @override
   Enterprise rebuild(void Function(EnterpriseBuilder) updates) =>

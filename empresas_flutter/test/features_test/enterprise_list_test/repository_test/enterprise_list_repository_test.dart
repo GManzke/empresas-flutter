@@ -15,8 +15,7 @@ main() {
         password: '12341234', email: 'testeapple@ioasys.com.br');
 
     final response = await repository.getEnterprises(
-        type: '3',
-        name: 'f',
+        name: 'a',
         accessToken: authResponse.headers['access-token'],
         client: authResponse.headers['client'],
         uid: authResponse.headers['uid']);
