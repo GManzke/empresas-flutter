@@ -29,50 +29,52 @@ class EnterpriseListView extends BaseLayout<EnterpriseListViewModel, AppState> {
   Widget layout(
       BuildContext ctx, EnterpriseListViewModel vm, BoxConstraints cts) {
     _hasError(vm, ctx);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+    return Stack(
       children: [
-        Stack(
-          alignment: Alignment.bottomCenter,
-          overflow: Overflow.visible,
+        Column(
           children: [
-            Column(
-              children: [
-                ListTopBanner(cts: cts),
-                Container(
-                  height: (cts.maxHeight * 0.04),
-                )
-              ],
-            ),
-            Positioned(
-                right: cts.padding(0.06),
-                top: cts.padding(0.12),
-                child: GestureDetector(
-                  onTap: vm.logOut,
-                  child: Icon(
-                    Icons.logout,
-                    size: 28,
-                    color: Colors.white,
-                  ),
-                )),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: cts.padding(0.06)),
-              child: ListSearchField(
-                onSubmit: vm.searchEnterprise,
-              ),
+            ListTopBanner(cts: cts),
+            Container(
+              height: (cts.maxHeight * 0.04),
             )
           ],
         ),
-        if (vm.enterpriseList.isNotEmpty)
-          Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: cts.padding(0.06), vertical: cts.padding(0.04)),
-            child: Text(
-              '${vm.enterpriseList.length} resultado(s) encontrado(s)',
-              style: _textStyle,
+        SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: cts.padding(0.06)),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: cts.padding(0.06)),
+                    child: GestureDetector(
+                      onTap: vm.logOut,
+                      child: Icon(
+                        Icons.logout,
+                        size: 28,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                ListSearchField(
+                  onSubmit: vm.searchEnterprise,
+                ),
+                if (vm.enterpriseList.isNotEmpty)
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: cts.padding(0.04)),
+                    child: Text(
+                      '${vm.enterpriseList.length} resultado(s) encontrado(s)',
+                      style: _textStyle,
+                    ),
+                  ),
+                Expanded(child: _buildEnterpriseList(vm, cts))
+              ],
             ),
           ),
-        Expanded(child: _buildEnterpriseList(vm, cts))
+        ),
       ],
     );
   }
@@ -84,17 +86,14 @@ class EnterpriseListView extends BaseLayout<EnterpriseListViewModel, AppState> {
       );
     }
     if (vm.enterpriseList.isNotEmpty) {
-      return Padding(
-        padding: EdgeInsets.symmetric(horizontal: cts.padding(0.06)),
-        child: ListView.builder(
-            padding: EdgeInsets.all(0),
-            itemCount: vm.enterpriseList.length,
-            itemBuilder: (ctx, i) => EnterpriseItemLayout(
-                  goToDetails: vm.goToDetails,
-                  info: vm.enterpriseList[i],
-                  cts: cts,
-                )),
-      );
+      return ListView.builder(
+          padding: EdgeInsets.all(0),
+          itemCount: vm.enterpriseList.length,
+          itemBuilder: (ctx, i) => EnterpriseItemLayout(
+                goToDetails: vm.goToDetails,
+                info: vm.enterpriseList[i],
+                cts: cts,
+              ));
     } else {
       return Center(
         child: Text(

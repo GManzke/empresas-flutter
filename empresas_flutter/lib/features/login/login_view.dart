@@ -21,40 +21,62 @@ class LoginView extends BaseLayout<LoginViewModel, AppState> {
   @override
   Widget layout(BuildContext ctx, LoginViewModel vm, BoxConstraints cts) {
     _hasError(vm, ctx);
-    return Column(
+    return Stack(
       children: [
-        LoginTopBanner(cts: cts),
-        Form(
-          key: _formKey,
+        SingleChildScrollView(
+          reverse: true,
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: cts.padding(0.04)),
+            padding:
+                EdgeInsets.only(bottom: MediaQuery.of(ctx).viewInsets.bottom),
             child: Column(
               children: [
-                LoginEmailField(
-                  onSaved: vm.onSaved,
+                LoginTopBanner(cts: cts),
+                Form(
+                  key: _formKey,
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: cts.padding(0.04)),
+                    child: Column(
+                      children: [
+                        LoginEmailField(
+                          onSaved: vm.onSaved,
+                        ),
+                        SizedBox(
+                          height: cts.padding(0.04),
+                        ),
+                        LoginPasswordField(
+                          onSaved: vm.onSaved,
+                        ),
+                        SizedBox(
+                          height: cts.padding(0.08),
+                        ),
+                        LoginButton(
+                          onLoginPressed: () => authenticatePressed(vm, ctx),
+                          isLoading: vm.isLoading,
+                        )
+                      ],
+                    ),
+                  ),
                 ),
-                SizedBox(
-                  height: cts.padding(0.04),
-                ),
-                LoginPasswordField(
-                  onSaved: vm.onSaved,
-                ),
-                SizedBox(
-                  height: cts.padding(0.08),
-                ),
-                LoginButton(
-                  onLoginPressed: () => authenticatePressed(vm),
-                  isLoading: vm.isLoading,
-                )
               ],
             ),
           ),
         ),
+        if (vm.isLoading)
+          Container(
+            width: cts.maxWidth,
+            height: cts.maxHeight,
+            color: Colors.black.withOpacity(0.5),
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          )
       ],
     );
   }
 
-  void authenticatePressed(LoginViewModel vm) {
+  void authenticatePressed(LoginViewModel vm, BuildContext ctx) {
+    FocusScope.of(ctx).unfocus();
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       vm.authenticateUser();

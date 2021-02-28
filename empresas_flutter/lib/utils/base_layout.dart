@@ -6,7 +6,8 @@ import 'package:redux/redux.dart';
 abstract class BaseLayout<V extends ViewModel<S>, S> extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
-        resizeToAvoidBottomPadding: false,
+        backgroundColor: Colors.white,
+        resizeToAvoidBottomInset: false,
         body: LayoutBuilder(
           builder: (ctx, BoxConstraints cts) => StoreConnector<S, V>(
             converter: (store) => convertViewModel(store),
