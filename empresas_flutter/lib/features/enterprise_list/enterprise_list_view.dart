@@ -3,6 +3,7 @@ import 'package:empresas_flutter/extensions/constraints_extension.dart';
 import 'package:empresas_flutter/features/enterprise_list/redux/enterprise_list_actions.dart';
 import 'package:empresas_flutter/models/app_state.dart';
 import 'package:empresas_flutter/utils/base_layout.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:redux/redux.dart';
@@ -29,39 +30,44 @@ class EnterpriseListView extends BaseLayout<EnterpriseListViewModel, AppState> {
   Widget layout(
       BuildContext ctx, EnterpriseListViewModel vm, BoxConstraints cts) {
     _hasError(vm, ctx);
-    return Stack(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Column(
+        Stack(
           children: [
             ListTopBanner(cts: cts),
-            Container(
-              height: (cts.maxHeight * 0.04),
-            )
+            Padding(
+              padding: EdgeInsets.only(
+                  top: cts.maxHeight * 0.2 - 30,
+                  left: cts.padding(0.06),
+                  right: cts.padding(0.06)),
+              child: ListSearchField(
+                onSubmit: vm.searchEnterprise,
+              ),
+            ),
+            Positioned(
+              top: MediaQuery.of(ctx).padding.top,
+              right: 0,
+              child: Padding(
+                padding: EdgeInsets.all(cts.padding(0.06)),
+                child: GestureDetector(
+                  onTap: vm.logOut,
+                  child: Icon(
+                    Icons.logout,
+                    size: 28,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
-        SafeArea(
+        Expanded(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: cts.padding(0.06)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: cts.padding(0.06)),
-                    child: GestureDetector(
-                      onTap: vm.logOut,
-                      child: Icon(
-                        Icons.logout,
-                        size: 28,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-                ListSearchField(
-                  onSubmit: vm.searchEnterprise,
-                ),
                 if (vm.enterpriseList.isNotEmpty)
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: cts.padding(0.04)),
