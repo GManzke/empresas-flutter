@@ -12,4 +12,6 @@ class EnterpriseListViewModel extends ViewModel<AppState> {
       store.dispatch(SearchEnterpriseAction(name));
 
   BuiltList<Enterprise> get enterpriseList => store.state.enterpriseList;
+
+  bool get isLoading => store.state.isLoading;
 }

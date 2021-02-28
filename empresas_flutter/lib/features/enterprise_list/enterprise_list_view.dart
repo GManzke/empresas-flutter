@@ -39,20 +39,35 @@ class EnterpriseListView extends BaseLayout<EnterpriseListViewModel, AppState> {
             )
           ],
         ),
-        if(vm.enterpriseList.isNotEmpty)
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(cts.padding(0.06)),
-            child: ListView.builder(
-                itemCount: vm.enterpriseList.length,
-                itemBuilder: (ctx, i) => EnterpriseItemLayout(
-                      cts: cts,
-                      goToDetails: (info) {},
-                      info: vm.enterpriseList[i],
-                    )),
-          ),
-        )
+        Expanded(child: _buildEnterpriseList(vm, cts))
       ],
     );
+  }
+
+  _buildEnterpriseList(EnterpriseListViewModel vm, BoxConstraints cts) {
+    if (vm.isLoading) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+    if (vm.enterpriseList.isNotEmpty) {
+      return Padding(
+        padding: EdgeInsets.all(cts.padding(0.06)),
+        child: ListView.builder(
+            itemCount: vm.enterpriseList.length,
+            itemBuilder: (ctx, i) => EnterpriseItemLayout(
+                  cts: cts,
+                  goToDetails: (info) {},
+                  info: vm.enterpriseList[i],
+                )),
+      );
+    } else {
+      return Center(
+        child: Text(
+          'Nenhum resultado encontrado',
+          style: TextStyle(fontSize: 16),
+        ),
+      );
+    }
   }
 }
