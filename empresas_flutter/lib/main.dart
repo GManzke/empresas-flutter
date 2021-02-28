@@ -3,6 +3,7 @@ import 'package:empresas_flutter/models/app_state.dart';
 import 'package:empresas_flutter/navigation/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:redux/redux.dart';
 
 import 'redux/middlewares.dart';
@@ -20,15 +21,17 @@ class IoasysApp extends StatelessWidget {
     return StoreProvider(
       store: Store<AppState>(appReducers,
           initialState: AppState(), middleware: createApplicationMiddleware()),
-      child: MaterialApp(
-        title: 'Ioasys',
-        theme: ThemeData(
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          accentColor: AppColors.primary,
+      child: OverlaySupport(
+        child: MaterialApp(
+          title: 'Ioasys',
+          theme: ThemeData(
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+            accentColor: AppColors.primary,
+          ),
+          onGenerateRoute: AppRoutes.generateRoute,
+          initialRoute: AppRoutes.loader,
+          navigatorKey: navigatorKey,
         ),
-        onGenerateRoute: AppRoutes.generateRoute,
-        initialRoute: AppRoutes.login,
-        navigatorKey: navigatorKey,
       ),
     );
   }

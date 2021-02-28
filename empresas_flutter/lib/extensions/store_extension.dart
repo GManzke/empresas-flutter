@@ -7,10 +7,8 @@ import '../redux/actions.dart';
 
 extension StoreExtension on Store {
   void operationFail(
-      {String minor = 'Ocorreu um erro', @required String major}) {
-    this.dispatch(UpdateErrorAction(ErrorState((b) => b
-      ..minor = minor
-      ..major = major)));
-  }
+          {String minor = 'Ocorreu um erro', @required String major}) =>
+      this.dispatch(UpdateErrorAction(ErrorState((b) => b
+        ..minor = minor
+        ..major = major)));
 }
-//TODO: use ..

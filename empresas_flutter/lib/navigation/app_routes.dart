@@ -21,7 +21,7 @@ class AppRoutes {
             builder: (_) => EnterpriseDetailView(
                   info: settings.arguments,
                 ));
-      default:
+      case loader:
         return MaterialPageRoute(builder: (_) => LoaderView());
     }
   }

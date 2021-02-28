@@ -5,6 +5,7 @@ import 'package:empresas_flutter/features/login/viewmodel/login_viewmodel.dart';
 import 'package:empresas_flutter/models/app_state.dart';
 import 'package:empresas_flutter/utils/base_layout.dart';
 import 'package:flutter/material.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:redux/redux.dart';
 
 import 'components/login_email_field.dart';
@@ -63,10 +64,7 @@ class LoginView extends BaseLayout<LoginViewModel, AppState> {
   void _hasError(LoginViewModel vm, BuildContext ctx) {
     if (vm.hasError) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        Scaffold.of(ctx).showSnackBar(SnackBar(
-          content: Text(vm.error.major),
-          duration: Duration(seconds: 3),
-        ));
+        showSimpleNotification(Text(vm.error.major), background: Colors.red);
         vm.clearError();
       });
     }

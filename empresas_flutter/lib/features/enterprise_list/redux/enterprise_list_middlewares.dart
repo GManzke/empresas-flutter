@@ -30,16 +30,22 @@ Middleware<AppState> _searchEnterpriseMiddleware(Repository repository) {
         name: action.name,
       );
 
-      if (response.statusCode == 200) {
-        final list = json.decode(response.body)['enterprises'];
+      switch (response.statusCode) {
+        case 200:
+          final list = json.decode(response.body)['enterprises'];
 
-        final enterpriseList = BuiltList<Enterprise>(list.map((enterprise) =>
-              serializers.deserializeWith(
-                  Enterprise.serializer, enterprise)));
+          final enterpriseList = BuiltList<Enterprise>(list.map((enterprise) =>
+              serializers.deserializeWith(Enterprise.serializer, enterprise)));
 
-        store.dispatch(UpdateEnterpriseList(enterpriseList));
-      } else {
-        store.operationFail(major: 'Não foi possível carregar as empresas');
+          store.dispatch(UpdateEnterpriseList(enterpriseList));
+          break;
+        case 401:
+          store.operationFail(major: 'Sessão expirada, faça login novamente');
+          store.dispatch(LogOutAction());
+          break;
+        default:
+          store.operationFail(major: 'Não foi possível carregar as empresas');
+          break;
       }
     } catch (e) {
       print(e);

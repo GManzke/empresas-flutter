@@ -10,11 +10,17 @@ import 'package:empresas_flutter/navigation/app_routes.dart';
 import 'package:empresas_flutter/navigation/redux/navigation_actions.dart';
 import 'package:empresas_flutter/redux/actions.dart';
 import 'package:empresas_flutter/repository/repository.dart';
+import 'package:empresas_flutter/repository/storage.dart';
 import 'package:redux/redux.dart';
 
 List<Middleware<AppState>> createLogInMiddleware(Repository repository) => [
       TypedMiddleware<AppState, AuthenticateUserAction>(
           _authenticateUserMiddleware(repository)),
+      TypedMiddleware<AppState, LoadUserFromStorageAction>(
+          _loadUserFromStorageMiddleware()),
+      TypedMiddleware<AppState, PersistUserAction>(
+          _persistUserStateMiddleware()),
+      TypedMiddleware<AppState, ClearUserAction>(_clearUserStateMiddleware()),
     ];
 
 Middleware<AppState> _authenticateUserMiddleware(Repository repository) {
@@ -27,9 +33,13 @@ Middleware<AppState> _authenticateUserMiddleware(Repository repository) {
       final bodyData = json.decode(response.body);
 
       if (bodyData['success'] == true) {
-        store.dispatch(UpdateUserAction(UserState((b) => b
+        final user = UserState((b) => b
           ..investorName = bodyData['investor']['investor_name']
-          ..email = 'email')));
+          ..email = 'email');
+
+        store.dispatch(UpdateUserAction(user));
+
+        store.dispatch(PersistUserAction(user));
 
         store.dispatch(PersistAuthCredentialsAction(AuthCredentials((b) => b
           ..accessToken = response.headers['access-token']
@@ -51,3 +61,31 @@ Middleware<AppState> _authenticateUserMiddleware(Repository repository) {
     }
   };
 }
+
+Middleware<AppState> _loadUserFromStorageMiddleware() {
+  return (Store<AppState> store, action, NextDispatcher next) async {
+    try {
+      final user = await userStateStorage.load();
+
+      if (user == null) {
+        return store.dispatch(NavigateReplaceAction(AppRoutes.login));
+      }
+
+      store.dispatch(UpdateUserAction(user));
+      store.dispatch(NavigateReplaceAction(AppRoutes.enterprise_list));
+    } catch (e) {
+      print(e);
+      store.operationFail(major: 'Não foi possível carregar as informações');
+    } finally {
+      store.dispatch(StopLoadingAction());
+    }
+  };
+}
+
+Middleware<AppState> _persistUserStateMiddleware() =>
+    (Store<AppState> store, action, NextDispatcher next) =>
+        userStateStorage.save(action.userState);
+
+Middleware<AppState> _clearUserStateMiddleware() =>
+    (Store<AppState> store, action, NextDispatcher next) =>
+        userStateStorage.delete();

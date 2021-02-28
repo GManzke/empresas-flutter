@@ -1,12 +1,10 @@
 import 'package:empresas_flutter/features/login/redux/login_actions.dart';
 import 'package:empresas_flutter/models/app_state.dart';
-import 'package:empresas_flutter/models/error_state.dart';
-import 'package:empresas_flutter/redux/actions.dart';
+import 'package:empresas_flutter/utils/error_viewmodel.dart';
 import 'package:empresas_flutter/utils/viewmodel.dart';
 import 'package:redux/redux.dart';
 
-
-class LoginViewModel extends ViewModel<AppState> {
+class LoginViewModel extends ViewModel<AppState> with ErrorHandlerViewModel {
   String _password;
   String _email;
 
@@ -22,12 +20,6 @@ class LoginViewModel extends ViewModel<AppState> {
       _password = value;
     }
   }
-
-  void clearError() => store.dispatch(UpdateErrorAction(ErrorState()));
-
-  bool get hasError => store.state.errorState.major != null;
-
-  ErrorState get error => store.state.errorState;
 
   bool get isLoading => store.state.isLoading;
 }

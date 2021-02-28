@@ -9,3 +9,5 @@ class UpdateErrorAction {
 
   UpdateErrorAction(this.errorState);
 }
+
+class LogOutAction {}

@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:built_value/serializer.dart';
 import 'package:empresas_flutter/auth/auth_credentials.dart';
+import 'package:empresas_flutter/models/user_state.dart';
 import 'package:empresas_flutter/serializer/serializers.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -70,3 +71,6 @@ class StorageManager<T> {
 
 final authCredentialsStorage = StorageManager<AuthCredentials>(
     AuthCredentials.serializer, 'access_credentials');
+
+final userStateStorage =
+    StorageManager<UserState>(UserState.serializer, 'user_state');

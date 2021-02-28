@@ -7,6 +7,16 @@ class AuthenticateUserAction {
   AuthenticateUserAction({this.password, this.email});
 }
 
+class LoadUserFromStorageAction {}
+
+class PersistUserAction {
+  final UserState userState;
+
+  PersistUserAction(this.userState);
+}
+
+class ClearUserAction {}
+
 class UpdateUserAction {
   final UserState userState;
 

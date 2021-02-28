@@ -11,14 +11,12 @@ List<Middleware<AppState>> createAuthCredentialsMiddleware() => [
           _clearAuthCredentialsMiddleware()),
     ];
 
-//TODO: Verificar se é necessário o await
-
 Middleware<AppState> _persistAuthCredentialsMiddleware() {
-  return (Store<AppState> store, action, NextDispatcher next) async =>
-      await authCredentialsStorage.save(action.authCredentials);
+  return (Store<AppState> store, action, NextDispatcher next) =>
+      authCredentialsStorage.save(action.authCredentials);
 }
 
 Middleware<AppState> _clearAuthCredentialsMiddleware() {
-  return (Store<AppState> store, action, NextDispatcher next) async =>
-      await authCredentialsStorage.delete();
+  return (Store<AppState> store, action, NextDispatcher next) =>
+      authCredentialsStorage.delete();
 }
