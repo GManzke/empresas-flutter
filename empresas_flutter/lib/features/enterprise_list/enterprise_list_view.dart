@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 
 import '../../models/app_state.dart';
-import 'enterprise_list_viewmodel.dart';
+import 'viewmodel/enterprise_list_viewmodel.dart';
 
 class EnterpriseListView extends BaseLayout<EnterpriseListViewModel, AppState> {
   @override
