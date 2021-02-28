@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:empresas_flutter/configuration/app_config.dart';
 import 'package:empresas_flutter/extensions/constraints_extension.dart';
 import 'package:empresas_flutter/models/enterprise.dart';
@@ -32,11 +33,15 @@ class EnterpriseItemLayout extends StatelessWidget {
                   'https://${AppConfig.authority}${info.photo}',
                   color: Colors.black.withOpacity(0.4),
                   colorBlendMode: BlendMode.darken,
+                  height: cts.maxHeight * 0.26,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) =>
+                      Image.asset('assets/blank_enterprise_banner.png'),
                 ),
                 width: double.infinity,
               ),
             ),
-            Text(
+            AutoSizeText(
               info.enterpriseName,
               style: TextStyle(color: Colors.white, fontSize: 24),
             )

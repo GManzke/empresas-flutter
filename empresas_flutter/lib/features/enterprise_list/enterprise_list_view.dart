@@ -1,4 +1,5 @@
 import 'package:empresas_flutter/extensions/constraints_extension.dart';
+import 'package:empresas_flutter/features/enterprise_list/redux/enterprise_list_actions.dart';
 import 'package:empresas_flutter/models/app_state.dart';
 import 'package:empresas_flutter/utils/base_layout.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,12 @@ class EnterpriseListView extends BaseLayout<EnterpriseListViewModel, AppState> {
   @override
   EnterpriseListViewModel convertViewModel(Store<AppState> store) =>
       EnterpriseListViewModel(store);
+
+  @override
+  void onInit(Store<AppState> store) {
+    store.dispatch(SearchEnterpriseAction(''));
+    super.onInit(store);
+  }
 
   @override
   Widget layout(

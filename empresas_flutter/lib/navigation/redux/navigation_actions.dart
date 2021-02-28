@@ -10,3 +10,5 @@ class NavigatePushAction {
 
   NavigatePushAction(this.newRoute, {this.args});
 }
+
+class NavigatePopAction {}

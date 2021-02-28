@@ -11,6 +11,8 @@ List<Middleware<AppState>> createNavigationMiddleware(
           _navigateReplaceMiddleware(navigatorKey)),
       TypedMiddleware<AppState, NavigatePushAction>(
           _navigatePushMiddleware(navigatorKey)),
+      TypedMiddleware<AppState, NavigatePopAction>(
+          _navigatePopMiddleware(navigatorKey)),
     ];
 
 Middleware<AppState> _navigateReplaceMiddleware(
@@ -23,3 +25,8 @@ Middleware<AppState> _navigatePushMiddleware(
     (Store<AppState> store, action, NextDispatcher next) => navigatorKey
         .currentState
         .pushNamed(action.newRoute, arguments: action.args);
+
+Middleware<AppState> _navigatePopMiddleware(
+        GlobalKey<NavigatorState> navigatorKey) =>
+    (Store<AppState> store, action, NextDispatcher next) =>
+        navigatorKey.currentState.pop();

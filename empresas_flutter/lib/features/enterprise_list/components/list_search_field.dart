@@ -1,3 +1,4 @@
+import 'package:empresas_flutter/configuration/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class ListSearchField extends StatelessWidget {
@@ -30,7 +31,7 @@ class ListSearchField extends StatelessWidget {
           ),
           prefixIcon: Icon(Icons.search_rounded),
           filled: true,
-          fillColor: Color(int.parse('0xffF5F5F5'))),
+          fillColor: AppColors.secondary),
     );
   }
 }

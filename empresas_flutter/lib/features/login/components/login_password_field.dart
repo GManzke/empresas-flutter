@@ -1,3 +1,4 @@
+import 'package:empresas_flutter/configuration/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class LoginPasswordField extends StatefulWidget {
@@ -58,9 +59,7 @@ class _LoginPasswordFieldState extends State<LoginPasswordField> {
                 color: Colors.red,
               ),
             ),
-            fillColor: Color(
-              int.parse('0xffF5F5F5'),
-            ),
+            fillColor: AppColors.secondary,
             suffixIcon: GestureDetector(
                 onTap: changeVisibility,
                 child: Icon(

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:empresas_flutter/configuration/app_colors.dart';
 import 'package:empresas_flutter/configuration/app_config.dart';
 import 'package:empresas_flutter/extensions/constraints_extension.dart';
@@ -33,23 +34,28 @@ class EnterpriseDetailView
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              AspectRatio(
-                aspectRatio: 1.0,
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: AppColors.secondary,
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Icon(
-                    Icons.arrow_back_rounded,
-                    color: AppColors.primary,
-                    size: 24,
+              GestureDetector(
+                onTap: vm.navigateBack,
+                child: AspectRatio(
+                  aspectRatio: 1.0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: AppColors.secondary,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Icon(
+                      Icons.arrow_back_rounded,
+                      color: AppColors.primary,
+                      size: 24,
+                    ),
                   ),
                 ),
               ),
-              Text(
-                info.enterpriseName,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              Expanded(
+                child: AutoSizeText(
+                  info.enterpriseName,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
               ),
               AspectRatio(
                 aspectRatio: 1.0,
