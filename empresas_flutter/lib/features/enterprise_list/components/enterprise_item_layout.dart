@@ -21,16 +21,20 @@ class EnterpriseItemLayout extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Container(
-              alignment: Alignment.center,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-              clipBehavior: Clip.antiAlias,
-              child: Image.network(
-                'https://${AppConfig.authority}${info.photo}',
-                color: Colors.black.withOpacity(0.4),
-                colorBlendMode: BlendMode.darken,
+            Hero(
+              tag: info.id,
+              child: Container(
+                alignment: Alignment.center,
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                clipBehavior: Clip.antiAlias,
+                child: Image.network(
+                  'https://${AppConfig.authority}${info.photo}',
+                  color: Colors.black.withOpacity(0.4),
+                  colorBlendMode: BlendMode.darken,
+                ),
+                width: double.infinity,
               ),
-              width: double.infinity,
             ),
             Text(
               info.enterpriseName,

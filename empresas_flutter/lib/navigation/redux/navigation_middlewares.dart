@@ -9,9 +9,17 @@ List<Middleware<AppState>> createNavigationMiddleware(
     [
       TypedMiddleware<AppState, NavigateReplaceAction>(
           _navigateReplaceMiddleware(navigatorKey)),
+      TypedMiddleware<AppState, NavigatePushAction>(
+          _navigatePushMiddleware(navigatorKey)),
     ];
 
 Middleware<AppState> _navigateReplaceMiddleware(
         GlobalKey<NavigatorState> navigatorKey) =>
     (Store<AppState> store, action, NextDispatcher next) =>
         navigatorKey.currentState.pushReplacementNamed(action.routeReplacement);
+
+Middleware<AppState> _navigatePushMiddleware(
+        GlobalKey<NavigatorState> navigatorKey) =>
+    (Store<AppState> store, action, NextDispatcher next) => navigatorKey
+        .currentState
+        .pushNamed(action.newRoute, arguments: action.args);

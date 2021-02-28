@@ -1,3 +1,4 @@
+import 'package:empresas_flutter/configuration/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class LoginEmailField extends StatelessWidget {
@@ -51,7 +52,7 @@ class LoginEmailField extends StatelessWidget {
                 ),
               ),
               filled: true,
-              fillColor: Color(int.parse('0xffF5F5F5'))),
+              fillColor: AppColors.secondary),
         ),
       ],
     );

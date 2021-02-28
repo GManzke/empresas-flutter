@@ -57,7 +57,7 @@ class EnterpriseListView extends BaseLayout<EnterpriseListViewModel, AppState> {
             itemCount: vm.enterpriseList.length,
             itemBuilder: (ctx, i) => EnterpriseItemLayout(
                   cts: cts,
-                  goToDetails: (info) {},
+                  goToDetails: vm.goToDetails,
                   info: vm.enterpriseList[i],
                 )),
       );
