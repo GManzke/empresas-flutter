@@ -1,6 +1,5 @@
 import 'package:empresas_flutter/features/login/redux/login_actions.dart';
 import 'package:empresas_flutter/models/app_state.dart';
-import 'package:empresas_flutter/models/operation_state.dart';
 import 'package:empresas_flutter/models/user_state.dart';
 import 'package:empresas_flutter/redux/actions.dart';
 import 'package:empresas_flutter/redux/reducers.dart';
@@ -13,19 +12,17 @@ main() {
   setUp(() => store =
       Store<AppState>(appReducers, initialState: AppState(), middleware: []));
 
-  group('OperationState reducers', () {
-    test('Should change operation state to pending', () {
-      store.dispatch(
-          UpdateOperationStateAction(OperationState.OPERATION_PENDING));
+  group('Loading reducers', () {
+    test('Should start loading', () {
+      store.dispatch(StartLoadingAction());
 
-      expect(store.state.operationState, OperationState.OPERATION_PENDING);
+      expect(store.state.isLoading, true);
     });
 
     test('Should change operation state to succeeded', () {
-      store.dispatch(
-          UpdateOperationStateAction(OperationState.OPERATION_SUCCEEDED));
+      store.dispatch(StopLoadingAction());
 
-      expect(store.state.operationState, OperationState.OPERATION_SUCCEEDED);
+      expect(store.state.isLoading, false);
     });
   });
 

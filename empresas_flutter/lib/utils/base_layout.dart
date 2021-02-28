@@ -5,18 +5,14 @@ import 'package:redux/redux.dart';
 
 abstract class BaseLayout<V extends ViewModel<S>, S> extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: LayoutBuilder(
+  Widget build(BuildContext context) => Scaffold(
+        body: LayoutBuilder(
           builder: (ctx, BoxConstraints cts) => StoreConnector<S, V>(
             builder: (ctx, V vm) => layout(ctx, vm, cts),
             converter: (store) => convertViewModel(store),
           ),
         ),
-      ),
-    );
-  }
+      );
 
   V convertViewModel(Store<S> store);
 

@@ -1,3 +1,5 @@
+import 'package:empresas_flutter/features/enterprise_list/enterprise_list_view.dart';
+import 'package:empresas_flutter/features/login/login_view.dart';
 import 'package:empresas_flutter/features/main/LoaderView.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +11,10 @@ class AppRoutes {
 
   static Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case login:
+        return MaterialPageRoute(builder: (_) => LoginView());
+      case enterprise_list:
+        return MaterialPageRoute(builder: (_) => EnterpriseListView());
       default:
         return MaterialPageRoute(builder: (_) => LoaderView());
     }

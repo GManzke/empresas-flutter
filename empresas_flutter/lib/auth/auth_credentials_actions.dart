@@ -1,9 +1,9 @@
 import 'auth_credentials.dart';
 
-class PersistAuthCredentials {
+class PersistAuthCredentialsAction {
   final AuthCredentials authCredentials;
 
-  PersistAuthCredentials(this.authCredentials);
+  PersistAuthCredentialsAction(this.authCredentials);
 }
 
-class ClearAuthCredentials {}
+class ClearAuthCredentialsAction {}

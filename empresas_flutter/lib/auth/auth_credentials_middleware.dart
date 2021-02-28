@@ -5,9 +5,9 @@ import 'package:redux/redux.dart';
 import 'auth_credentials_actions.dart';
 
 List<Middleware<AppState>> createAuthCredentialsMiddleware() => [
-      TypedMiddleware<AppState, PersistAuthCredentials>(
+      TypedMiddleware<AppState, PersistAuthCredentialsAction>(
           _persistAuthCredentialsMiddleware()),
-      TypedMiddleware<AppState, ClearAuthCredentials>(
+      TypedMiddleware<AppState, ClearAuthCredentialsAction>(
           _clearAuthCredentialsMiddleware()),
     ];
 

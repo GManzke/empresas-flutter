@@ -1,5 +1,4 @@
 import 'package:built_value/built_value.dart';
-import 'package:empresas_flutter/models/operation_state.dart';
 import 'package:empresas_flutter/models/user_state.dart';
 
 import 'error_state.dart';
@@ -11,15 +10,16 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
 
   factory AppState([void Function(AppStateBuilder) updates]) = _$AppState;
 
-  static void _initializeBuilder(AppStateBuilder builder) =>
-      builder..operationState = OperationState.OPERATION_NONE;
-
-  @nullable
-  OperationState get operationState;
+  static void _initializeBuilder(AppStateBuilder builder) => builder
+    ..isLoading = false
+    ..errorState.build();
 
   @nullable
   ErrorState get errorState;
 
   @nullable
   UserState get userState;
+
+  @nullable
+  bool get isLoading;
 }

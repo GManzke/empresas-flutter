@@ -8,17 +8,16 @@ part of 'app_state.dart';
 
 class _$AppState extends AppState {
   @override
-  final OperationState operationState;
-  @override
   final ErrorState errorState;
   @override
   final UserState userState;
+  @override
+  final bool isLoading;
 
   factory _$AppState([void Function(AppStateBuilder) updates]) =>
       (new AppStateBuilder()..update(updates)).build();
 
-  _$AppState._({this.operationState, this.errorState, this.userState})
-      : super._();
+  _$AppState._({this.errorState, this.userState, this.isLoading}) : super._();
 
   @override
   AppState rebuild(void Function(AppStateBuilder) updates) =>
@@ -31,34 +30,29 @@ class _$AppState extends AppState {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is AppState &&
-        operationState == other.operationState &&
         errorState == other.errorState &&
-        userState == other.userState;
+        userState == other.userState &&
+        isLoading == other.isLoading;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc($jc(0, operationState.hashCode), errorState.hashCode),
-        userState.hashCode));
+    return $jf($jc($jc($jc(0, errorState.hashCode), userState.hashCode),
+        isLoading.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('AppState')
-          ..add('operationState', operationState)
           ..add('errorState', errorState)
-          ..add('userState', userState))
+          ..add('userState', userState)
+          ..add('isLoading', isLoading))
         .toString();
   }
 }
 
 class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   _$AppState _$v;
-
-  OperationState _operationState;
-  OperationState get operationState => _$this._operationState;
-  set operationState(OperationState operationState) =>
-      _$this._operationState = operationState;
 
   ErrorStateBuilder _errorState;
   ErrorStateBuilder get errorState =>
@@ -71,15 +65,19 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
       _$this._userState ??= new UserStateBuilder();
   set userState(UserStateBuilder userState) => _$this._userState = userState;
 
+  bool _isLoading;
+  bool get isLoading => _$this._isLoading;
+  set isLoading(bool isLoading) => _$this._isLoading = isLoading;
+
   AppStateBuilder() {
     AppState._initializeBuilder(this);
   }
 
   AppStateBuilder get _$this {
     if (_$v != null) {
-      _operationState = _$v.operationState;
       _errorState = _$v.errorState?.toBuilder();
       _userState = _$v.userState?.toBuilder();
+      _isLoading = _$v.isLoading;
       _$v = null;
     }
     return this;
@@ -104,9 +102,9 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
     try {
       _$result = _$v ??
           new _$AppState._(
-              operationState: operationState,
               errorState: _errorState?.build(),
-              userState: _userState?.build());
+              userState: _userState?.build(),
+              isLoading: isLoading);
     } catch (_) {
       String _$failedField;
       try {
