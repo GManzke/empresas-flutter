@@ -27,7 +27,7 @@ class LoginView extends BaseLayout<LoginViewModel, AppState> {
         Form(
           key: _formKey,
           child: Padding(
-            padding: EdgeInsets.all(cts.padding(0.06)),
+            padding: EdgeInsets.symmetric(horizontal: cts.padding(0.04)),
             child: Column(
               children: [
                 LoginEmailField(

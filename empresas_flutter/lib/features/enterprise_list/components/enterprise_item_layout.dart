@@ -33,7 +33,7 @@ class EnterpriseItemLayout extends StatelessWidget {
                   'https://${AppConfig.authority}${info.photo}',
                   color: Colors.black.withOpacity(0.4),
                   colorBlendMode: BlendMode.darken,
-                  height: cts.maxHeight * 0.26,
+                  width: double.infinity,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) =>
                       Image.asset('assets/blank_enterprise_banner.png'),

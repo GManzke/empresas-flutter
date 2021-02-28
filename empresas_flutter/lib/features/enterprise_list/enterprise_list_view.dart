@@ -46,7 +46,7 @@ class EnterpriseListView extends BaseLayout<EnterpriseListViewModel, AppState> {
             ),
             Positioned(
                 right: cts.padding(0.06),
-                top: cts.padding(0.14),
+                top: cts.padding(0.12),
                 child: GestureDetector(
                   onTap: vm.logOut,
                   child: Icon(

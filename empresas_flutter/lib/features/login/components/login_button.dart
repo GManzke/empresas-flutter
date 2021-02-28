@@ -14,12 +14,12 @@ class LoginButton extends StatelessWidget {
         child: RaisedButton(
           child: Container(
             alignment: Alignment.center,
-              height: 32,
+              height: 26,
               child: isLoading
                   ? CircularProgressIndicator()
                   : Text(
                       'ENTRAR',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      style: TextStyle(color: Colors.white, fontSize: 18),
                     )),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
